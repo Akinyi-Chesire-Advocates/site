@@ -30,20 +30,20 @@ The single-page site is composed of 11 self-contained Svelte components, each ow
 | `PracticeAreas` | Bento-style grid of 6 practice areas. One featured card spans 2 rows with an image. Cards invert colors on hover. |
 | `Team` | Staggered card layout with grayscale-to-color image transitions and hover overlays for specialisation detail. |
 | `Testimonials` | Data-driven testimonial cards with avatar initials. Iterates over an array — easy to add/remove entries. |
-| `Insights` | Tabbed section (Articles / Updates / FAQs) with reactive tab switching via `$state`. |
-| `Locations` | Two office cards (Nairobi, Mombasa) with location images, addresses, and contact details. |
+| `Insights` | FAQ accordion with smooth `grid-template-rows` expand/collapse animation. `IntersectionObserver` scrolls the active item into view after expansion. |
+| `Locations` | Full-viewport banner with background image (Nairobi skyline). Single office card (Betty Business Centre, Kitengela) with address, hours, embedded Google Maps iframe, and Get Directions link. |
 | `Contact` | Split layout: form on the left, dark info panel on the right with email/WhatsApp channels and social links. Receives `openLegal` and `showToast` callbacks. |
 | `Footer` | Three-column footer with brand info, quick links, and legal compliance links. Dynamic copyright year. |
 
 ### Shared Patterns
 
-- **Scroll reveal**: `IntersectionObserver` in `+page.svelte` watches `.reveal` elements and adds `.visible` class on intersection. Staggered delays via `.reveal-delay-1` through `.reveal-delay-4`.
-- **Overlays**: Consultation and legal overlays are managed in `+page.svelte` with `$state` booleans. They use `role="dialog"`, `aria-modal`, and Escape key dismissal.
+- **Scroll reveal**: `IntersectionObserver` in `+page.svelte` watches `.reveal` elements and adds `.visible` class on intersection. Staggered delays via `.reveal-delay-1` through `.reveal-delay-3`.
+- **Overlays**: Consultation and legal overlays are managed in `+page.svelte` with `$state` booleans. They use `role="dialog"`, `aria-labelledby`, a dedicated `<button class="overlay__backdrop">` for backdrop-click close, and Escape key dismissal.
 - **Props flow**: Parent page passes callbacks (`openConsultation`, `openLegal`, `showToast`) down to Nav, Contact, and Footer via Svelte 5 `$props()`.
 
 ### Static Assets
 
-Images live in `static/images/` and are served at `/images/` in the built site. Each `<img>` has an `onerror` fallback pointing to Unsplash, so the site remains visually complete even when local images are missing.
+Images live in `src/lib/assets/` and are imported directly by components as Vite asset references, which get content-hashed and bundled at build time.
 
 ---
 
@@ -115,14 +115,14 @@ The page uses **scroll-snap sections** at `100vh` minimum height, creating a ful
 ### Type Scale (Fluid)
 
 ```css
---text-xs:    clamp(0.70rem, 0.65rem + 0.25vw, 0.80rem);
---text-sm:    clamp(0.80rem, 0.75rem + 0.25vw, 0.90rem);
---text-base:  clamp(0.95rem, 0.88rem + 0.35vw, 1.10rem);
---text-lg:    clamp(1.10rem, 1.00rem + 0.50vw, 1.30rem);
---text-xl:    clamp(1.30rem, 1.10rem + 1.00vw, 1.75rem);
---text-2xl:   clamp(1.75rem, 1.40rem + 1.75vw, 2.75rem);
---text-3xl:   clamp(2.25rem, 1.75rem + 2.50vw, 3.75rem);
---text-hero:  clamp(2.75rem, 2.00rem + 3.75vw, 5.00rem);
+--text-xs:    clamp(0.78rem, 0.72rem + 0.3vw, 0.88rem);
+--text-sm:    clamp(0.92rem, 0.85rem + 0.35vw, 1.05rem);
+--text-base:  clamp(1.08rem, 1.00rem + 0.4vw, 1.22rem);
+--text-lg:    clamp(1.28rem, 1.15rem + 0.65vw, 1.5rem);
+--text-xl:    clamp(1.55rem, 1.28rem + 1.35vw, 2.1rem);
+--text-2xl:   clamp(2.1rem, 1.7rem + 2vw, 3.25rem);
+--text-3xl:   clamp(2.75rem, 2.1rem + 3.25vw, 4.25rem);
+--text-hero:  clamp(3.4rem, 2.4rem + 5vw, 6rem);
 ```
 
 ---
@@ -164,8 +164,8 @@ Each section of the site serves a specific purpose in the visitor journey:
 | **Practice Areas** | Core service offering. The bento grid lets the eye wander rather than march — each card earns discovery. | Cream |
 | **Team** | Humanise the firm. Photos with grayscale-to-colour transition signal "we're approachable behind the suits." | Cream-light |
 | **Testimonials** | Third-party validation. Italic text + left border = editorial quotation style, not a carousel. | Warm-white |
-| **Insights** | Demonstrate thought leadership. Tabbed interface keeps content compact. Dark background signals a shift toward intellectual depth. | Charcoal |
-| **Locations** | Practical: where are they? Image cards with contact details. Two offices = national presence. | Cream-light |
+| **Insights** | Demonstrate thought leadership via an FAQ accordion. Smooth expand/collapse animation invites curiosity. Dark background signals a shift toward intellectual depth. | Charcoal |
+| **Locations** | Practical: where are they? Full-width banner with embedded Google Maps pin for Betty Business Centre, Kitengela. Get Directions link. | Image overlay |
 | **Contact** | Conversion point. Split layout: form invites action, dark panel offers alternative channels (email, WhatsApp). | Cream |
 | **Footer** | Navigation redundancy, legal compliance, brand sign-off. | Charcoal |
 
@@ -173,29 +173,27 @@ Each section of the site serves a specific purpose in the visitor journey:
 
 ## 8. Assets
 
-### Images (`static/images/`)
+### Images (`src/lib/assets/images/`)
 
 | File | Usage |
 |---|---|
 | `hero-bg.jpg` | Hero background — legal consultation scene |
-| `office-nairobi.jpg` | About section — office interior |
-| `legal-books.jpg` | About section — decorative |
-| `handshake.jpg` | Practice areas — featured card |
 | `team-woman.jpg` | Team card — managing partner |
-| `team-man.jpg` | Team card — partner |
-| `nairobi-skyline.jpg` | Location card — Nairobi office |
-| `mombasa.jpg` | Location card — Mombasa office |
+| `nairobi-skyline.jpg` | Locations section — office banner background |
 
-All images have Unsplash fallback URLs in `onerror` handlers, so the site renders gracefully when local files are absent.
-
-### Branding Artifacts (`static/`)
+### Branding Artifacts (`src/lib/assets/brand/`)
 
 | File | Description |
 |---|---|
-| `IMG-20260318-WA0017.jpg` | Brand artifact (logo/card) |
-| `IMG-20260318-WA0018.jpg` | Brand artifact (logo/card) |
-| `logo.svg` | Full SVG logo |
-| `rough-cream-logo.png` | Textured logo variant |
+| `logo-name.png` | Wordmark logo used in Nav and Footer |
+| `rough-cream-logo.png` | Textured cream logo variant used in TribalBar canvas pattern |
+
+### Static root (`static/`)
+
+| File | Description |
+|---|---|
+| `favicon.ico` | Site favicon (32×32) |
+| `og-image.jpg` | Open Graph social share image |
 
 ---
 

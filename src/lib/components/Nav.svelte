@@ -1,6 +1,7 @@
 <script>
   import logoName from '$lib/assets/brand/logo-name.png';
   import TribalBar from './TribalBar.svelte';
+  import { base } from '$app/paths';
 
   let mobileOpen = $state(false);
 
@@ -14,7 +15,7 @@
 
 <nav class="nav" id="nav">
   <div class="container nav__inner">
-    <a href="/" class="nav__logo">
+    <a href="{base}/" class="nav__logo">
       <img src={logoName} alt="Akinyi & Chesire Advocates LLP" class="nav__logo-img" />
     </a>
     <div class="nav__links">

@@ -11,9 +11,9 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			// Set base path for GitHub Pages: /<repo-name>
-			// Leave empty for custom domain or root deployment
-			base: ''
+			// Reads BASE_PATH env var set by the GitHub Actions workflow.
+			// Falls back to '' for local dev and custom domain deployments.
+			base: process.env.BASE_PATH ?? ''
 		}
 	}
 };

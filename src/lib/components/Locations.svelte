@@ -1,5 +1,5 @@
 <script>
-  import nairobiSkyline from '$lib/assets/images/nairobi-skyline.jpg';
+  import nairobiSkyline from "$lib/assets/images/nairobi-skyline.jpg";
 </script>
 
 <section id="locations" class="locations">
@@ -16,8 +16,8 @@
           Kitengela Office
         </div>
         <div class="location-card__address">
-          <strong>Betty Business Centre</strong><br/>
-          Namanga Road, Opposite Kitengela Mall<br/>
+          <strong>Betty Business Centre</strong><br />
+          Namanga Road, Opposite Kitengela Mall<br />
           Kitengela, Kenya
         </div>
         <div class="location-card__details">
@@ -25,15 +25,6 @@
             <span class="material-symbols-outlined">schedule</span>
             Mon – Fri · 8:00 AM – 5:30 PM
           </div>
-        </div>
-        <div class="location-card__map">
-          <iframe
-            title="Kitengela Office Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4300.089503266177!2d36.953077224522296!3d-1.479170496051061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f9ff4d3c23c8f%3A0xbff2a0edb3f49a63!2sBettys%20Building%20Center!5e1!3m2!1sen!2snl!4v1774055022478!5m2!1sen!2snl"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
         </div>
         <a
           href="https://www.google.com/maps/dir/?api=1&destination=Betty+Business+Centre,+Namanga+Road,+Kitengela,+Kenya"
@@ -44,6 +35,15 @@
           <span class="material-symbols-outlined">near_me</span>
           Get Directions
         </a>
+        <div class="location-card__map">
+          <iframe
+            title="Kitengela Office Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4300.089503266177!2d36.953077224522296!3d-1.479170496051061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f9ff4d3c23c8f%3A0xbff2a0edb3f49a63!2sBettys%20Building%20Center!5e1!3m2!1sen!2snl!4v1774055022478!5m2!1sen!2snl"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
     background-size: cover;
     background-position: center 40%;
     background-repeat: no-repeat;
-    min-height: clamp(420px, 55vw, 640px);
+    min-height: clamp(480px, 60vw, 700px);
     display: flex;
     align-items: center;
   }
@@ -77,23 +77,36 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: var(--space-3xl) var(--space-xl);
+    padding: var(--space-2xl) var(--space-lg);
     display: flex;
     flex-direction: column;
     gap: var(--space-xl);
   }
+  @media (min-width: 640px) {
+    .locations__content {
+      padding: var(--space-3xl) var(--space-xl);
+    }
+  }
   @media (min-width: 768px) {
     .locations__content {
       flex-direction: row;
-      align-items: center;
-      gap: clamp(var(--space-xl), 6vw, var(--space-3xl));
+      align-items: flex-start;
+      gap: clamp(var(--space-xl), 5vw, var(--space-3xl));
     }
   }
-  .locations__label { flex-shrink: 0; }
+  @media (min-width: 1024px) {
+    .locations__content {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+  }
+  .locations__label {
+    flex-shrink: 0;
+    min-width: 160px;
+  }
   .locations__label h2 {
-    font-family: 'DM Serif Display', serif;
+    font-family: "DM Serif Display", serif;
     font-size: var(--text-3xl);
     line-height: 1.1;
     color: var(--cream);
@@ -104,12 +117,18 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: var(--space-xl) var(--space-2xl);
+    padding: var(--space-lg) var(--space-xl);
     flex: 1;
-    max-width: 510px;
+    min-width: 0;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .location-card {
+      padding: var(--space-xl) var(--space-2xl);
+    }
   }
   .location-card__name {
-    font-family: 'DM Serif Display', serif;
+    font-family: "DM Serif Display", serif;
     font-size: var(--text-xl);
     color: var(--cream);
     display: flex;
@@ -117,19 +136,21 @@
     gap: 0.5rem;
     margin-bottom: var(--space-md);
   }
-  .location-card__name :global(.material-symbols-outlined) { color: var(--gold); }
+  .location-card__name :global(.material-symbols-outlined) {
+    color: var(--gold);
+  }
   .location-card__address {
     font-size: var(--text-sm);
     color: rgba(230, 226, 218, 0.85);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     line-height: 1.7;
     padding-bottom: var(--space-md);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   .location-card__map {
-    margin-top: var(--space-md);
+    margin-top: var(--space-sm);
     width: 100%;
-    height: 180px;
+    height: clamp(180px, 25vw, 260px);
     overflow: hidden;
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -144,18 +165,24 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    margin-top: var(--space-sm);
+    margin-top: var(--space-xs);
     font-size: var(--text-sm);
     color: var(--gold-light, #d4aa6a);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .location-card__directions:hover { color: #f0c97a; }
+  .location-card__directions:hover {
+    color: #f0c97a;
+  }
   .location-card__directions :global(.material-symbols-outlined) {
     font-size: 1rem;
     color: inherit;
   }
-  .location-card__details { display: flex; flex-direction: column; gap: 0.5rem; }
+  .location-card__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
   .location-card__detail {
     display: flex;
     align-items: center;

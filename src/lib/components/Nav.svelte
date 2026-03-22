@@ -48,7 +48,6 @@
     <div style="margin-top:var(--space-xl)">
       <button onclick={() => { toggleMobile(); openConsultation(); }} class="btn btn--gold"><span class="material-symbols-outlined" style="font-size:1.1rem">calendar_month</span>Book Consultation</button>
     </div>
-    <div style="position:absolute;bottom:0;left:0;right:0;"><TribalBar /></div>
   </div>
 </div>
 

@@ -6,7 +6,7 @@
 |---|---|
 | **Client** | Akinyi & Chesire Advocates LLP |
 | **Industry** | Legal services — Advocates & Commissioners for Oaths |
-| **Location** | Kenya (Nairobi HQ + Mombasa coastal office), East Africa reach |
+| **Location** | Kenya (Kitengela — Betty Business Centre, Namanga Road), East Africa reach |
 | **Target Audience** | High-net-worth individuals, corporate executives, family estates, property investors, SMEs in Kenya/East Africa |
 | **Brand Personality** | Authoritative yet approachable. Rooted in Kenyan heritage, modern in execution. Trustworthy, loyal, warm. |
 | **Emotional Goal** | Visitors should feel: *"These people will protect me. I can trust them with my life's most important decisions."* |
@@ -25,13 +25,13 @@ The single-page site is composed of 11 self-contained Svelte components, each ow
 |---|---|
 | `Nav` | Sticky navigation with desktop links, CTA buttons, and a slide-out mobile menu. Receives `openConsultation` callback via props. |
 | `Hero` | Full-viewport section with background image, gradient overlay, headline, body text, CTAs, and inline stats. All text uses fluid `clamp()` sizing. |
-| `TrustBar` | Horizontal strip of trust badges (LSK, years, offices, clients). Edge-to-edge dark background for visual rhythm. |
-| `About` | Asymmetric two-column editorial layout with an image stack (photos + stat cards) and firm narrative. |
+| `TrustBar` | Horizontal strip of trust badges (LSK licence, 15+ years practice, Kitengela location, 500+ clients). Edge-to-edge dark background for visual rhythm. |
+| `About` | Asymmetric two-column editorial layout with a 2×2 grid of firm value cards (Integrity First, Equity & Justice, Strategic Thinking, Client Partnership) and firm narrative. On mobile the text block (heading + paragraphs) reorders above the value cards. |
 | `PracticeAreas` | Bento-style grid of 6 practice areas. One featured card spans 2 rows with an image. Cards invert colors on hover. |
 | `Team` | Staggered card layout with grayscale-to-color image transitions and hover overlays for specialisation detail. |
 | `Testimonials` | Data-driven testimonial cards with avatar initials. Iterates over an array — easy to add/remove entries. |
 | `Insights` | FAQ accordion with smooth `grid-template-rows` expand/collapse animation. `IntersectionObserver` scrolls the active item into view after expansion. |
-| `Locations` | Full-viewport banner with background image (Nairobi skyline). Single office card (Betty Business Centre, Kitengela) with address, hours, embedded Google Maps iframe, and Get Directions link. |
+| `Locations` | Full-viewport banner with background image (Nairobi skyline). Single office card (Betty Business Centre, Namanga Road, Kitengela) with address, hours, embedded Google Maps iframe, and Get Directions link. Card stretches to fill available width; map height scales fluidly with `clamp()`. |
 | `Contact` | Split layout: form on the left, dark info panel on the right with email/WhatsApp channels and social links. Receives `openLegal` and `showToast` callbacks. |
 | `Footer` | Three-column footer with brand info, quick links, and legal compliance links. Dynamic copyright year. |
 
@@ -165,7 +165,7 @@ Each section of the site serves a specific purpose in the visitor journey:
 | **Team** | Humanise the firm. Photos with grayscale-to-colour transition signal "we're approachable behind the suits." | Cream-light |
 | **Testimonials** | Third-party validation. Italic text + left border = editorial quotation style, not a carousel. | Warm-white |
 | **Insights** | Demonstrate thought leadership via an FAQ accordion. Smooth expand/collapse animation invites curiosity. Dark background signals a shift toward intellectual depth. | Charcoal |
-| **Locations** | Practical: where are they? Full-width banner with embedded Google Maps pin for Betty Business Centre, Kitengela. Get Directions link. | Image overlay |
+| **Locations** | Practical: where are they? Full-width banner with embedded Google Maps pin for Betty Business Centre, Namanga Road, Kitengela. Get Directions link. | Image overlay |
 | **Contact** | Conversion point. Split layout: form invites action, dark panel offers alternative channels (email, WhatsApp). | Cream |
 | **Footer** | Navigation redundancy, legal compliance, brand sign-off. | Charcoal |
 
